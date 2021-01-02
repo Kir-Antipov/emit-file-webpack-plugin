@@ -1,0 +1,35 @@
+{
+  "name": "emit-file-webpack-plugin",
+  "version": "1.0.0",
+  "description": "Webpack plugin to emit files.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kir-Antipov/emit-file-webpack-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "create",
+    "file",
+    "emit",
+    "copy",
+    "generate"
+  ],
+  "author": {
+    "name": "Kir_Antipov",
+    "url": "https://github.com/Kir-Antipov"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kir-Antipov/emit-file-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/Kir-Antipov/emit-file-webpack-plugin#readme",
+  "devDependencies": {
+    "webpack": "^5.11.1"
+  },
+  "peerDependencies": {
+    "webpack": "*",
+    "webpack-sources": "*"
+  }
+}
