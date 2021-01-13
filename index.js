@@ -91,6 +91,14 @@ EmitFilePlugin.prototype.apply = function (compiler) {
 function emitFile(options, compilation, resolve) {
     const outputPath = options.path || compilation.options.output.path;
 
+    if (options.hash) {
+      if (options.filename.includes('[hash]')) {
+        options.filename = options.filename.replace('[hash]', compilation.hash);
+      } else {
+        options.filename = `${options.filename}?${compilation.hash}`;
+      }
+    }
+
     const outputPathAndFilename = path.resolve(
         compilation.options.output.path,
         outputPath,
