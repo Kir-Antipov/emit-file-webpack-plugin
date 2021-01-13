@@ -104,7 +104,7 @@ function emitFile(options, compilation, resolve) {
     const outputPathAndFilename = path.resolve(
         compilation.options.output.path,
         outputPath,
-		filename
+        filename
     );
 
     const relativeOutputPath = path.relative(
