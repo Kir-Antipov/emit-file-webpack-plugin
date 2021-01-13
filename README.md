@@ -36,6 +36,8 @@ module.exports = {
 
             // REQUIRED.
             // Name of the file to add to assets.
+            // if hash option is enabled add [hash] here to choose where to insert the compilation hash
+            // see the hash option for more information
             filename: `index.js`,
 
             // REQUIRED.
@@ -46,7 +48,13 @@ module.exports = {
             // OPTIONAL: defaults to the webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL.
             // Asset processing stage.
             // https://webpack.js.org/api/compilation-hooks/#processassets
-            stage: webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL
+            stage: webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
+
+            // OPTIONAL
+            // Adds the compilation hash to the filename. You can either choose within the filename
+            // where the hash is inserted by adding [hash] i.e. test.[hash].js or the hash will be
+            // appended to the end of the file i.e. test.js?hash
+            hash: false
         })
     ]
 };
