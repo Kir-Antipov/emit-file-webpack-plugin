@@ -25,6 +25,12 @@ const { Source, RawSource } = webpack.sources || require("webpack-sources");
  * REQUIRED.
  * Name of the file to add to assets.
  *
+ * @property {boolean} hash
+ * OPTIONAL: defaults to false.
+ * Adds the compilation hash to the filename. You can either choose within the filename
+ * where the hash is inserted by adding `[hash]` i.e. `test.[hash].js` or the hash will be
+ * appended to the end of the file i.e. `test.js?hash`.
+ *
  * @property {number} stage
  * OPTIONAL: defaults to the webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL.
  * Asset processing stage.
@@ -94,11 +100,12 @@ function emitFile(options, compilation, resolve) {
     let filename = options.filename;
 
     if (options.hash) {
-      if (options.filename.includes('[hash]')) {
-        filename = options.filename.replace('[hash]', compilation.hash);
-      } else {
-        filename = `${options.filename}?${compilation.hash}`;
-      }
+        const hash = compilation.hash || "";
+        if (filename.includes("[hash]")) {
+            filename = filename.replace("[hash]", hash);
+        } else if (hash) {
+            filename = `${filename}?${hash}`;
+        }
     }
 
     const outputPathAndFilename = path.resolve(
