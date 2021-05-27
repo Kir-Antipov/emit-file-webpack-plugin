@@ -38,7 +38,8 @@ const { Source, RawSource } = webpack.sources || require("webpack-sources");
  * @property {string|Buffer|Source|((assets: Record<string, Source>) => (string|Buffer|Source))|((assets: Record<string, Source>) => (Promise<string|Buffer|Source>))} content
  * REQUIRED.
  * File content. Can be either a string, a buffer, or a (asynchronous) function.
- * If the resulting object is not a string or a buffer, it will be converted to JSON.
+ * If the resulting object is not a string or a buffer, it will be converted
+ * to string via `.toString` (if the function was overridden) or `JSON.stringify`.
  */
 
 /**
@@ -130,7 +131,7 @@ function emitFile(options, compilation, resolve) {
     contentPromise.then(content => {
         const source = content instanceof Source
             ? content
-            : new RawSource((typeof content == "string" || content instanceof Buffer) ? content : JSON.stringify(content));
+            : contentToSource(content);
 
         if (version < 5) {
             compilation.assets[relativeOutputPath] = source;
@@ -140,6 +141,24 @@ function emitFile(options, compilation, resolve) {
 
         resolve();
     });
+}
+
+function contentToSource(content) {
+    if (content === undefined || content === null) {
+        content = "";
+    } else if (typeof content !== "string" && !(content instanceof Buffer)) {
+        const hasItsOwnToString = typeof content.toString === "function"
+            && content.toString !== Object.prototype.toString
+            && content.toString !== Array.prototype.toString;
+
+        if (hasItsOwnToString) {
+            content = content.toString();
+        } else {
+            content = JSON.stringify(content);
+        }
+    }
+
+    return new RawSource(content);
 }
 
 module.exports = EmitFilePlugin;
