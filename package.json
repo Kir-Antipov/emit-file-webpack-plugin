@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/Kir-Antipov/emit-file-webpack-plugin#readme",
   "devDependencies": {
-    "webpack": "^5.14.0"
+    "webpack": "^5.37.1"
   },
   "peerDependencies": {
     "webpack": "*",
