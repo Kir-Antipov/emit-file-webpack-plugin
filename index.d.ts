@@ -9,7 +9,7 @@ type Content = RawContent |
 /**
  * The EmitFilePlugin config.
  */
-class EmitFilePluginOptions {
+declare class EmitFilePluginOptions {
     /**
      * OPTIONAL: defaults to the Webpack output path.
      * Output path.
@@ -49,7 +49,7 @@ class EmitFilePluginOptions {
 /**
  * Webpack plugin to emit files.
  */
-class EmitFilePlugin {
+declare class EmitFilePlugin {
     /**
      * Webpack plugin to emit files.
      *
@@ -58,4 +58,4 @@ class EmitFilePlugin {
     constructor(options: EmitFilePluginOptions);
 }
 
-export default EmitFilePlugin;
+export = EmitFilePlugin;
